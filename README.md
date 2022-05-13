@@ -20,7 +20,7 @@
                 field.isAccessible = true
                 field[manager] = 0
 
-                //方案3
+                //方案3，小米framework增加的字段
                 field = AccessibilityManager::class.java.getDeclaredField("mIsFinalEnabled")
                 field.isAccessible = true
                 field[manager] = false
