@@ -10,10 +10,21 @@
             try {
                 var field = AccessibilityManager::class.java.getDeclaredField("sInstance")
                 field.isAccessible = true
+                //方案1，mi 8 会崩溃，可使用方案2，3
                 val manager = field[null] as AccessibilityManager
                 field = AccessibilityManager::class.java.getDeclaredField("mIsEnabled")
                 field.isAccessible = true
                 field[manager] = false
+                //方案2
+                field = AccessibilityManager::class.java.getDeclaredField("mRelevantEventTypes")
+                field.isAccessible = true
+                field[manager] = 0
+
+                //方案3
+                field = AccessibilityManager::class.java.getDeclaredField("mIsFinalEnabled")
+                field.isAccessible = true
+                field[manager] = false
+                
                 hasConfig = false
             } catch (e: Throwable) {
                 Log.e("Anti", "xxxxx", e)
